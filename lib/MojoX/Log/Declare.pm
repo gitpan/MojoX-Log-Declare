@@ -3,7 +3,7 @@ package MojoX::Log::Declare;
 use Mojo::Base -base;
 use Log::Declare;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use strict;
 use warnings;
@@ -19,6 +19,11 @@ use warnings;
             Log::Declare->log( $level, ['MOJO'], @_ );
         };
     }
+
+    *{ __PACKAGE__ . "::log" } = sub {
+        my $self = shift;
+        Log::Declare->log( 'info', ['MOJO'], @_ );
+    };
 }
 
 1;
